@@ -27,6 +27,15 @@ const bearReducer = (bears = [], action) => {
             return action.bears;
         case 'ADD_BEAR':
             return [...bears,action.bear]
+        case 'DELETE_BEAR':
+            return bears.filter(bear=> +bear.id !== +action.id)
+        case 'UPDATE_BEAR':
+            return bears.map(bear => {
+                if(+bear.id === +action.id)
+                    return action.bear;
+                else 
+                    return bear;
+            })
     }
     return bears;
 }

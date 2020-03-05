@@ -59,7 +59,7 @@ export default () => {
     <div>
       <h2>Bears</h2>
       <BearList  deleteBear={deleteBear} updateBear={updateBear} />
-      <InputForm  addBear={addBear} />
+      <InputForm  />
     </div>
   )
 }
