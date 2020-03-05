@@ -1,16 +1,22 @@
 import React from 'react';
 import './BearCard.css';
 import axios from 'axios'
-import {useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const BearCard = props => {
 
+    const form = useSelector(state => state.form)
     const dispatch = useDispatch();
 
     const deleteBear = async () => {
         await axios.delete(`http://localhost/api/bears/${props.id}`)
-        dispatch({type: 'DELETE_BEAR',id:props.id})
-      }
+        dispatch({ type: 'DELETE_BEAR', id: props.id })
+    }
+
+    const updateBear = async () => {
+        await axios.put(`http://localhost/api/bears/${props.id}`, form)
+        dispatch({ type: 'UPDATE_BEAR', id: props.id , bear: {...form,id:props.id} })
+    }
 
     return (
         <div className='bearcard-container'>
@@ -19,7 +25,7 @@ const BearCard = props => {
                 <p className='bearcard-name'>{props.name}</p>
             </div>
             <div className='bearcard-actions'>
-                <div onClick={props.updateBear}>Update</div>
+                <div onClick={updateBear}>Update</div>
                 <div onClick={deleteBear}>Delete</div>
             </div>
         </div>
